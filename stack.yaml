@@ -1,0 +1,12 @@
+resolver: lts-7.4
+packages:
+- '.'
+extra-deps:
+- xmonad-contrib-0.12
+- X11-xft-0.3.1
+# - xmobar-0.24.3
+flags: {}
+# flags:
+#   xmobar:
+#     with_xft: true
+extra-package-dbs: []
