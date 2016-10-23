@@ -142,6 +142,7 @@ getConfig xmproc =
 
 main :: IO ()
 main = do
+  spawn "~/.fehbg"
   xmobarCfg <- inXmonDir "src/xmobar.hs"
   xmproc <- spawnPipe ("xmobar " ++ xmobarCfg)
   xmonad $ getConfig xmproc

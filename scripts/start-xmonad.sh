@@ -20,7 +20,6 @@ xcompmgr -n &
 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 update-notifier &
 ~/tools/bin/map_keys.sh
-~/.fehbg
 
 exec ~/.xmonad/xmonad-x86_64-linux
 
