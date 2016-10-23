@@ -40,7 +40,7 @@ getKeysBindings cfg = cfg
     ("M-<Backspace>", restartXmonad)
   , ("M-S-<Backspace>", io (exitWith ExitSuccess))
 
-  , ("M-S-<Return>", spawn "exo-open --launch TerminalEmulator")
+  , ("M-S-<Return>", spawn "~/tools/bin/emacs")
   , ("M-h", spawn "exo-open --launch FileManager")
   , ("M-t", spawn "exo-open --launch TerminalEmulator")
   , ("M-l", spawn "slock")
