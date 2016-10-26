@@ -62,6 +62,7 @@ getKeysBindings cfg = cfg
   , ("M-h", spawn "exo-open --launch FileManager")
   , ("M-t", spawn "exo-open --launch TerminalEmulator")
   , ("M-l", spawn "slock")
+  , ("M-c", spawn "~/tools/bin/touchpad.sh")
   -- , ("<Print>", spawn "xfce4-screenshooter -f")
   -- , ("M1-<Print>", spawn "xfce4-screenshooter -w")
 
