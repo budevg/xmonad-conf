@@ -86,6 +86,14 @@ getKeysBindings cfg = cfg
   , ("M-x", submapKeys metaXKeys)
 
   ]
+  `additionalKeysP`
+  [(mask ++ "M-" ++ [key], action tag)
+     | (tag, key)  <- zip (workspaces cfg) "1234567890"
+     , (mask, action) <- [ ("", windows . W.greedyView)
+                         , ("S-", windows . W.shift)
+                         ]
+  ]
+
   where submapKeys ks = submap $ mkKeymap cfg ks
         metaXKeys =
           [ ("m m", spawn "amixer -D pulse set Master toggle")
@@ -127,7 +135,7 @@ getConfig xmproc =
         , clickJustFocuses = False
         , borderWidth = 2
         , modMask = mod4Mask
-        -- , workspaces = undefined
+        , workspaces = map show [1..10 :: Int]
         , normalBorderColor = "#2e505a"
         , focusedBorderColor = "#bb1d1d"
         -- , keys = undefined
