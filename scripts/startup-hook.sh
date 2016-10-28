@@ -5,3 +5,5 @@
 # running any programs which you want to use within xmonad but
 # which don't need to be initialized before xmonad is running.
 #
+
+bash ~/.fehbg
