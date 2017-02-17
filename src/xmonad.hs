@@ -129,7 +129,7 @@ getStartupHook = do
   spawn path
 
 getConfig xmproc =
-  let cfg = def
+  let cfg = desktopConfig
         { terminal = "xterm"
         , focusFollowsMouse = False
         , clickJustFocuses = False
@@ -152,4 +152,4 @@ main :: IO ()
 main = do
   xmobarCfg <- inXmonDir "src/xmobar.hs"
   xmproc <- spawnPipe ("xmobar " ++ xmobarCfg)
-  xmonad $ getConfig xmproc
+  launch $ getConfig xmproc

@@ -1,8 +1,8 @@
-resolver: lts-7.4
+resolver: lts-8.0
 packages:
 - '.'
 extra-deps:
-- xmonad-contrib-0.12
+- xmonad-contrib-0.13
 - X11-xft-0.3.1
 # - xmobar-0.24.3
 flags: {}
