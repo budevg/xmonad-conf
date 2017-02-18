@@ -11,6 +11,9 @@ import XMonad.Actions.SinkAll
 import XMonad.Actions.CycleWS
 import XMonad.Actions.Submap
 import XMonad.Actions.DwmPromote
+import XMonad.Actions.WithAll
+import XMonad.Prompt
+import XMonad.Prompt.ConfirmPrompt
 import XMonad.Config.Desktop
 import XMonad.Util.EZConfig
 import XMonad.Util.Run
@@ -27,6 +30,14 @@ restartXmonad = do
   xmonExec <- inXmonDir "xmonad-x86_64-linux"
   restart xmonExec True
 
+
+getPromptCfg =
+  def { position = Top
+      , font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
+      }
+withConfirm msg func =
+  confirmPrompt getPromptCfg msg func
+
 getKeysBindings cfg = cfg
   `removeKeysP`
   [ "M-q"
@@ -38,7 +49,7 @@ getKeysBindings cfg = cfg
   `additionalKeysP`
   [ -- restart xmonad
     ("M-<Backspace>", restartXmonad)
-  , ("M-S-<Backspace>", io (exitWith ExitSuccess))
+  , ("M-S-<Backspace>", withConfirm "Quit XMonad" $ io (exitWith ExitSuccess))
 
   , ("M-S-<Return>", spawn "~/tools/bin/emacs")
   , ("M-h", spawn "exo-open --launch FileManager")
@@ -70,6 +81,7 @@ getKeysBindings cfg = cfg
   , ("M-S-m", sendMessage RestoreNextMinimizedWin)
   , ("M-<Return>", dwmpromote)
   , ("M-<Delete>", kill1)
+  , ("M-S-<Delete>", withConfirm "kill all" $ killAll)
   , ("M-f", sendMessage (Toggle "Full"))
 
     -- float windows
