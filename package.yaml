@@ -1,0 +1,25 @@
+name:                xmonad-conf
+version:             0.1.0.0
+homepage:            https://github.com/budevg/xmonad-conf
+license:             BSD3
+author:              Evgeny Budilovsky
+copyright:           2017 Evgeny Budilovsky
+category:            System
+
+dependencies:
+  - base >= 4.7 && < 5
+  - xmonad
+  - xmonad-contrib >= 0.12
+  - directory
+  - unix
+  - containers
+  - network
+  - X11
+  - filepath
+
+ghc-options: -Wall -fno-warn-missing-signatures
+
+executables:
+  xmonad-x86_64-linux:
+    source-dirs:      src
+    main:             xmonad.hs
