@@ -1,10 +1,7 @@
-resolver: lts-9.1
+resolver: nightly-2018-09-06
 packages:
 - '.'
-extra-deps:
-- xmonad-contrib-0.13
-- X11-xft-0.3.1
-# - xmobar-0.24.3
+extra-deps: []
 flags: {}
 # flags:
 #   xmobar:

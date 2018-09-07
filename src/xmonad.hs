@@ -1,25 +1,27 @@
-import XMonad
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageDocks
-import XMonad.Layout.WindowNavigation
-import XMonad.Layout.ToggleLayouts
-import XMonad.Layout.NoBorders
-import XMonad.Layout.Minimize
-import XMonad.Layout.ResizableTile
-import XMonad.Actions.CopyWindow
-import XMonad.Actions.SinkAll
-import XMonad.Actions.CycleWS
-import XMonad.Actions.Submap
-import XMonad.Actions.DwmPromote
-import XMonad.Actions.WithAll
-import XMonad.Prompt
-import XMonad.Prompt.ConfirmPrompt
-import XMonad.Config.Desktop
-import XMonad.Util.EZConfig
-import XMonad.Util.Run
-import qualified XMonad.StackSet as W
-import System.FilePath
-import System.Exit
+import           Data.Maybe                     (isJust)
+import           System.Exit
+import           System.FilePath
+import           XMonad
+import           XMonad.Actions.CopyWindow
+import           XMonad.Actions.CycleWS
+import           XMonad.Actions.DwmPromote
+import           XMonad.Actions.Minimize
+import           XMonad.Actions.SinkAll
+import           XMonad.Actions.Submap
+import           XMonad.Actions.WithAll
+import           XMonad.Config.Desktop
+import           XMonad.Hooks.DynamicLog
+import           XMonad.Hooks.ManageDocks
+import           XMonad.Layout.Minimize
+import           XMonad.Layout.NoBorders
+import           XMonad.Layout.ResizableTile
+import           XMonad.Layout.ToggleLayouts
+import           XMonad.Layout.WindowNavigation
+import           XMonad.Prompt
+import           XMonad.Prompt.ConfirmPrompt
+import qualified XMonad.StackSet                as W
+import           XMonad.Util.EZConfig
+import           XMonad.Util.Run
 
 
 inXmonDir s = do
@@ -37,6 +39,11 @@ getPromptCfg =
       }
 withConfirm msg func =
   confirmPrompt getPromptCfg msg func
+
+copyToAllNonEmpty :: (Eq s, Eq i, Eq a)
+                  => W.StackSet i l a s sd -> W.StackSet i l a s sd
+copyToAllNonEmpty s = foldr copy s nonEmptyWSTags
+  where nonEmptyWSTags = W.tag <$> filter (isJust . W.stack) (W.workspaces s)
 
 getKeysBindings cfg = cfg
   `removeKeysP`
@@ -78,7 +85,7 @@ getKeysBindings cfg = cfg
   , ("C-M-<L>", sendMessage Shrink)
   , ("C-M-<R>", sendMessage Expand)
   , ("M-m", withFocused minimizeWindow)
-  , ("M-S-m", sendMessage RestoreNextMinimizedWin)
+  , ("M-S-m", withLastMinimized maximizeWindowAndFocus)
   , ("M-<Return>", dwmpromote)
   , ("M-<Delete>", kill1)
   , ("M-S-<Delete>", withConfirm "kill all" $ killAll)
@@ -87,6 +94,10 @@ getKeysBindings cfg = cfg
     -- float windows
   , ("M-<Home>", sinkAll)
   , ("M-o", withFocused $ windows . W.sink)
+
+    -- copy windows
+  , ("M-u", windows copyToAllNonEmpty)
+  , ("M-S-u", killAllOtherCopies)
 
     -- cycle workspaces
   , ("C-M1-<R>", moveTo Next NonEmptyWS)
@@ -121,7 +132,8 @@ getLogHook xmproc = do
 
 getManageHook =
   manageDocks <+> composeAll
-  [ -- className =? "Firefox" --> doFloat
+  [ resource =? "vlc" --> doFloat
+    -- className =? "Firefox" --> doFloat
   ]
 
 getLayoutHook = toggleLayouts (avoidStruts $ noBorders Full) $
