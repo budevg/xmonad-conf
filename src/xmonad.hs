@@ -175,5 +175,6 @@ getConfig xmproc =
 main :: IO ()
 main = do
   xmobarCfg <- inXmonDir "src/xmobar.hs"
-  xmproc <- spawnPipe ("xmobar " ++ xmobarCfg)
+  xmobarBin <- inXmonDir "xmobar"
+  xmproc <- spawnPipe (xmobarBin ++ " " ++ xmobarCfg)
   launch $ getConfig xmproc
