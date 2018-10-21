@@ -1,5 +1,12 @@
 #!/bin/bash
 
+IS_NIXOS=0
+SW=""
+if [ -f /etc/NIXOS ]; then
+    IS_NIXOS=1
+    SW="/run/current-system/sw"
+fi
+
 xdg-user-dirs-update
 dbus-launch
 xfsettingsd
@@ -17,9 +24,11 @@ trayer --edge top \
        --height 17 &
 nm-applet &
 xcompmgr -n &
-/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
-update-notifier &
-~/tools/bin/map_keys.sh
+exo-open $SW/etc/xdg/autostart/polkit-gnome-authentication-agent-1.desktop
+if [ $IS_NIXOS -eq 0 ]; then
+    update-notifier &
+fi
+map_keys.sh
 
 exec ~/.xmonad/xmonad-x86_64-linux
 

@@ -62,7 +62,8 @@ getKeysBindings cfg = cfg
   , ("M-h", spawn "exo-open --launch FileManager")
   , ("M-t", spawn "exo-open --launch TerminalEmulator")
   , ("M-l", spawn "slock")
-  -- , ("<Print>", spawn "xfce4-screenshooter -f")
+  , ("<Print>", spawn "xfce4-screenshooter -f")
+  -- , ("M-c", spawn "touchpad.sh")
   -- , ("M1-<Print>", spawn "xfce4-screenshooter -w")
 
     -- windows focus:
@@ -119,9 +120,10 @@ getKeysBindings cfg = cfg
 
   where submapKeys ks = submap $ mkKeymap cfg ks
         metaXKeys =
-          [ ("m m", spawn "amixer -D pulse set Master toggle")
-          , ("m <U>", spawn "amixer -D pulse set Master 10%+")
-          , ("m <D>", spawn "amixer -D pulse set Master 10%-")          ]
+          [ ("m m", spawn "amixer set Master toggle")
+          , ("m <U>", spawn "amixer set Master 10%+")
+          , ("m <D>", spawn "amixer set Master 10%-")
+          ]
 
 getLogHook xmproc = do
   dynamicLogWithPP $ xmobarPP

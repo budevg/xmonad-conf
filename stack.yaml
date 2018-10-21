@@ -1,4 +1,4 @@
-resolver: nightly-2018-09-06
+resolver: lts-13.7
 packages:
 - '.'
 extra-deps: []
@@ -7,3 +7,16 @@ flags: {}
 #   xmobar:
 #     with_xft: true
 extra-package-dbs: []
+nix:
+  packages:
+    - pkgconfig
+    - autoconf
+    - gcc
+    - xorg.libX11
+    - xorg.libXext
+    - xorg.libXft
+    - xorg.libXinerama
+    - xorg.libXpm
+    - xorg.libXrandr
+    - xorg.libXrender
+    - xorg.libXScrnSaver
