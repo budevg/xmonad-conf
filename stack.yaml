@@ -12,6 +12,7 @@ nix:
     - pkgconfig
     - autoconf
     - gcc
+    - gmp
     - xorg.libX11
     - xorg.libXext
     - xorg.libXft

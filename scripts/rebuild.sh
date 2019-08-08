@@ -4,7 +4,7 @@ set -x
 cd ~/.xmonad
 
 if [ ! -f xmobar ]; then
-    stack --local-bin-path=`pwd` install xmobar
+    stack --nix --local-bin-path=`pwd` install xmobar
 fi
 
-stack --local-bin-path=`pwd` install
+stack --nix --local-bin-path=`pwd` install
