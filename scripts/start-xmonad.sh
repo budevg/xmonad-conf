@@ -10,7 +10,8 @@ fi
 xdg-user-dirs-update
 dbus-launch
 xfsettingsd
-synapse -s &
+# synapse -s &
+xfce4-power-manager
 # xscreensaver -no-splash &
 # xfce4-panel &
 trayer --edge top \
