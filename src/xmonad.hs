@@ -63,8 +63,8 @@ getKeysBindings cfg = cfg
   , ("M-t", spawn "exo-open --launch TerminalEmulator")
   , ("M-l", spawn "slock")
   , ("<Print>", spawn "xfce4-screenshooter -f")
+  , ("M1-<Print>", spawn "xfce4-screenshooter -r")
   -- , ("M-c", spawn "touchpad.sh")
-  -- , ("M1-<Print>", spawn "xfce4-screenshooter -w")
   , ("M-v", spawn "LC_ALL=C rofi -show combi")
 
     -- windows focus:
