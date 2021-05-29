@@ -102,8 +102,8 @@ getKeysBindings cfg = cfg
   , ("M-S-u", killAllOtherCopies)
 
     -- cycle workspaces
-  , ("C-M1-<R>", moveTo Next NonEmptyWS)
-  , ("C-M1-<L>", moveTo Prev NonEmptyWS)
+  , ("C-M1-<R>", moveTo Next HiddenNonEmptyWS)
+  , ("C-M1-<L>", moveTo Prev HiddenNonEmptyWS)
   , ("C-M1-S-<R>", shiftToNext >> nextWS)
   , ("C-M1-S-<L>", shiftToPrev >> prevWS)
 
