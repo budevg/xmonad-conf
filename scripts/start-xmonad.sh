@@ -22,7 +22,8 @@ trayer --edge top \
        --width 10 \
        --transparent true \
        --tint 0x191970 \
-       --height 17 &
+       --height 17 \
+       --monitor primary &
 nm-applet &
 xcompmgr -n &
 exo-open $SW/etc/xdg/autostart/polkit-gnome-authentication-agent-1.desktop
