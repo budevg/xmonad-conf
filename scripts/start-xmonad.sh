@@ -9,9 +9,8 @@ fi
 
 xdg-user-dirs-update
 dbus-launch
-xfsettingsd --daemon
-# synapse -s &
-xfce4-power-manager --daemon
+exo-open $SW/etc/xdg/autostart/xfsettingsd.desktop
+exo-open $SW/etc/xdg/autostart/xfce4-power-manager.desktop
 # xscreensaver -no-splash &
 # xfce4-panel &
 trayer --edge top \
@@ -27,6 +26,7 @@ trayer --edge top \
 nm-applet &
 xcompmgr -n &
 exo-open $SW/etc/xdg/autostart/polkit-gnome-authentication-agent-1.desktop
+exo-open $SW/etc/xdg/autostart/xfce4-notifyd.desktop
 if [ $IS_NIXOS -eq 0 ]; then
     update-notifier &
 fi
