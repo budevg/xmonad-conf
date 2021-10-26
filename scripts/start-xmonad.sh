@@ -26,7 +26,7 @@ trayer --edge top \
 nm-applet &
 xcompmgr -n &
 exo-open $SW/etc/xdg/autostart/polkit-gnome-authentication-agent-1.desktop
-exo-open $SW/etc/xdg/autostart/xfce4-notifyd.desktop
+# exo-open $SW/etc/xdg/autostart/xfce4-notifyd.desktop
 if [ $IS_NIXOS -eq 0 ]; then
     update-notifier &
 fi
