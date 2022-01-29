@@ -136,6 +136,7 @@ getLogHook xmproc = do
 getManageHook =
   manageDocks <+> composeAll
   [ resource =? "vlc" --> doFloat
+  , className =? "ghidra-Ghidra" --> doFloat
     -- className =? "Firefox" --> doFloat
   ]
 
