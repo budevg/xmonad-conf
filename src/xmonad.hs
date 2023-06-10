@@ -1,4 +1,5 @@
 import           Data.Maybe                     (isJust)
+import           System.Directory
 import           System.Exit
 import           System.FilePath
 import           XMonad
@@ -24,8 +25,9 @@ import           XMonad.Util.EZConfig
 import           XMonad.Util.Run
 
 
+inXmonDir :: String -> X FilePath
 inXmonDir s = do
-  dir <- getXMonadDir
+  dir <- asks (cfgDir . directories)
   return $ dir </> s
 
 restartXmonad = do
@@ -102,8 +104,8 @@ getKeysBindings cfg = cfg
   , ("M-S-u", killAllOtherCopies)
 
     -- cycle workspaces
-  , ("C-M1-<R>", moveTo Next HiddenNonEmptyWS)
-  , ("C-M1-<L>", moveTo Prev HiddenNonEmptyWS)
+  , ("C-M1-<R>", moveTo Next (hiddenWS :&: Not emptyWS))
+  , ("C-M1-<L>", moveTo Prev (hiddenWS :&: Not emptyWS))
   , ("C-M1-S-<R>", shiftToNext >> nextWS)
   , ("C-M1-S-<L>", shiftToPrev >> prevWS)
 
@@ -178,7 +180,12 @@ getConfig xmproc =
 
 main :: IO ()
 main = do
-  xmobarCfg <- inXmonDir "src/xmobar.hs"
-  xmobarBin <- inXmonDir "xmobar"
+  userDir <- getHomeDirectory
+  let xmonRootDir = userDir </> ".xmonad"
+  let xmobarCfg = xmonRootDir </> "src/xmobar.hs"
+  let xmobarBin = xmonRootDir </> "xmobar"
   xmproc <- spawnPipe (xmobarBin ++ " " ++ xmobarCfg)
-  launch $ getConfig xmproc
+  launch (getConfig xmproc) $ Directories { dataDir = xmonRootDir
+                                          , cfgDir = xmonRootDir
+                                          , cacheDir = xmonRootDir
+                                          }

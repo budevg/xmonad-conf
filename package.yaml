@@ -8,8 +8,8 @@ category:            System
 
 dependencies:
   - base >= 4.7 && < 5
-  - xmonad
-  - xmonad-contrib >= 0.12
+  - xmonad == 0.17.2
+  - xmonad-contrib == 0.17.1
   - directory
   - unix
   - containers
