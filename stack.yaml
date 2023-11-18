@@ -1,7 +1,8 @@
 resolver: lts-20.24
 packages:
 - '.'
-extra-deps: []
+extra-deps:
+  - xmobar-0.44.2
 flags: {}
 # flags:
 #   xmobar:

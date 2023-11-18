@@ -10,6 +10,7 @@ dependencies:
   - base >= 4.7 && < 5
   - xmonad == 0.17.2
   - xmonad-contrib == 0.17.1
+  - xmobar == 0.44.2
   - directory
   - unix
   - containers
@@ -23,3 +24,6 @@ executables:
   xmonad-x86_64-linux:
     source-dirs:      src
     main:             xmonad.hs
+  xmobar:
+    source-dirs:      src
+    main:             xmobar.hs
