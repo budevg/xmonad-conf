@@ -69,6 +69,7 @@ getKeysBindings cfg =
                       , ("<Print>", spawn "xfce4-screenshooter -f")
                       , ("M1-<Print>", spawn "xfce4-screenshooter -r")
                       , ("C-<Print>", spawn "screen-record.sh")
+                      , ("M-<F9>", spawn "gromit-mpx")
                       , ("M-c", spawn "touchpad.sh")
                       , ("M-v", spawn "LC_ALL=C rofi -show combi")
                       , -- windows focus:
