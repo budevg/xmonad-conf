@@ -10,7 +10,7 @@ flags: {}
 extra-package-dbs: []
 nix:
   packages:
-    - pkgconfig
+    - pkg-config
     - autoconf
     - gcc
     - gmp
