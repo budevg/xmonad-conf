@@ -107,6 +107,10 @@ getKeysBindings cfg =
                       , ("C-M1-<L>", moveTo Prev (hiddenWS :&: Not emptyWS))
                       , ("C-M1-S-<R>", shiftToNext >> nextWS)
                       , ("C-M1-S-<L>", shiftToPrev >> prevWS)
+                      -- sound
+                      , ("<XF86AudioRaiseVolume>", raiseVolume)
+                      , ("<XF86AudioLowerVolume>", lowerVolume)
+                      , ("<XF86AudioMute>", toggleMute)
                       , -- M-x prefix
                         ("M-x", submapKeys metaXKeys)
                       ]
@@ -118,11 +122,14 @@ getKeysBindings cfg =
                           ]
                       ]
   where
+    raiseVolume = spawn "amixer set Master 5%+"
+    lowerVolume = spawn "amixer set Master 5%-"
+    toggleMute = spawn "amixer set Master toggle"
     submapKeys ks = submap $ mkKeymap cfg ks
     metaXKeys =
-      [ ("m m", spawn "amixer set Master toggle")
-      , ("m <U>", spawn "amixer set Master 10%+")
-      , ("m <D>", spawn "amixer set Master 10%-")
+      [ ("m m", toggleMute)
+      , ("m <U>", raiseVolume)
+      , ("m <D>", lowerVolume)
       ]
 
 getLogHook xmproc = do
