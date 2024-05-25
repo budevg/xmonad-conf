@@ -122,9 +122,9 @@ getKeysBindings cfg =
                           ]
                       ]
   where
-    raiseVolume = spawn "amixer set Master 5%+"
-    lowerVolume = spawn "amixer set Master 5%-"
-    toggleMute = spawn "amixer set Master toggle"
+    raiseVolume = spawn "~/.xmonad/scripts/set-volume.sh up"
+    lowerVolume = spawn "~/.xmonad/scripts/set-volume.sh down"
+    toggleMute = spawn "~/.xmonad/scripts/set-volume.sh toggle"
     submapKeys ks = submap $ mkKeymap cfg ks
     metaXKeys =
       [ ("m m", toggleMute)
